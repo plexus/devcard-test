@@ -13,13 +13,13 @@
             [ring.adapter.jetty :refer [run-jetty]])
   (:gen-class))
 
-(deftemplate page (io/resource "index.html") []
+(deftemplate index (io/resource "index.html") []
   [:body] impl/inject-devmode-html)
 
 (defroutes routes
   (resources "/")
   (resources "/react" {:root "react"})
-  (GET "/*" req (page)))
+  (GET "/*" req (index)))
 
 (defn- wrap-browser-caching-opts [handler]
   (wrap-browser-caching handler (or (env :browser-caching) {})))

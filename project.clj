@@ -19,7 +19,8 @@
                  [compojure "1.4.0"]
                  [enlive "1.1.6"]
                  [org.omcljs/om "1.0.0-alpha28"]
-                 [environ "1.0.1"]]
+                 [environ "1.0.1"]
+                 [devcards "0.2.1"]]
 
   :plugins [[lein-cljsbuild "1.1.1"]
             [lein-environ "1.0.1"]]
@@ -32,13 +33,13 @@
 
   :repl-options {:init-ns devcard-test.server}
 
-  :cljsbuild {:builds {:app {:source-paths ["src/cljs" "env/dev/cljs"]
-                             :compiler {:output-to     "resources/public/js/app.js"
-                                        :output-dir    "resources/public/js/out"
-                                        :source-map    "resources/public/js/out.js.map"
-                                        :preamble      ["react/react.min.js"]
-                                        :optimizations :none
-                                        :pretty-print  true}}}}
+  :cljsbuild {:builds
+              {:app {:source-paths ["src/cljs" "env/dev/cljs"]
+                     :figwheel {:devcards true}
+                     :compiler {:output-to     "resources/public/js/app.js"
+                                :output-dir    "resources/public/js/out"
+                                :source-map    "resources/public/js/out.js.map"
+                                :optimizations :none}}}}
 
   :figwheel {:http-server-root "public"
              :css-dirs ["resources/public/css"]
